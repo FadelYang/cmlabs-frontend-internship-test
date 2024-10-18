@@ -1,6 +1,8 @@
 $(document).ready(function () {
+  let mealCategories = []
+
   $.get('https://www.themealdb.com/api/json/v1/1/categories.php', function (data) {
-    const mealCategories = data.categories
+    mealCategories = data.categories
 
     const cards = mealCategories.map((mealCategory) => MealCategoryCard(mealCategory)).join('')
 
@@ -25,7 +27,10 @@ $(document).ready(function () {
 
     const categoryName = $(this).data('name')
 
-    console.log(`You click ${categoryName}`);
+    // Set local storage to send selected category data to detail page
+    const selectedCategoryData = mealCategories.filter((mealCategory) => mealCategory.strCategory == categoryName)[0]
+
+    localStorage.setItem('selectedCategoryData', JSON.stringify(selectedCategoryData))
 
     window.location.href = `pages/category-detail.html?categoryName=${encodeURIComponent(categoryName)}`
   })
