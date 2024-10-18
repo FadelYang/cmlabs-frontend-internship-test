@@ -17,6 +17,11 @@ $(document).ready(function () {
 
     const selectedCategoryData = JSON.parse(localStorage.getItem('selectedCategoryData'));
 
+    // Breadcrumb
+    $('#categoryBreadcrumb').html(selectedCategoryData.strCategory)
+
+    localStorage.setItem('selectedCategoryData', JSON.stringify(selectedCategoryData))
+
     $('#categoryThumb').attr('src', selectedCategoryData.strCategoryThumb).attr('alt', `${selectedCategoryData.strCategory} meals image`)
     $('.category-name').html(selectedCategoryData.strCategory)
     $('#categoryDescription').html(selectedCategoryData.strCategoryDescription)
@@ -44,18 +49,20 @@ $(document).ready(function () {
         }
     })
 
+
     // get detail recipe
     $(document).on('click', '.meals-recipe-link', function (e) {
         e.preventDefault();
 
         const mealId = $(this).data('name')
 
-        console.log(mealId);
+        console.log(selectedCategoryData.strCategory);
 
         // Set local storage to send selected category data to detail page
         const meal = meals.filter((meal) => meal.idMeal == mealId)[0]
 
         localStorage.setItem('detailMeal', JSON.stringify(meal))
+        localStorage.setItem('selectedCategory', JSON.stringify(selectedCategoryData.strCategory))
 
         window.location.href = `meal-detail.html?mealId=${encodeURIComponent(meal.idMeal)}`
     })

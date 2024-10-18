@@ -13,6 +13,21 @@ $(document).ready(function () {
 
     const urlParams = new URLSearchParams(window.location.search)
     const detailMeal = JSON.parse(localStorage.getItem('detailMeal'));
+    const selectedCategory = JSON.parse(localStorage.getItem('selectedCategory'));
+    const selectedCategoryData = JSON.parse(localStorage.getItem('selectedCategoryData'));
+
+    // Build a breadcrumb
+    $('#categoryBreadcrumb').html(selectedCategory)
+    $('#mealBreadcrumb').html(detailMeal.strMeal)
+
+    $('#categoryBreadcrumb').on('click', function (e) {
+        e.preventDefault()
+
+        localStorage.setItem('detailMeal', JSON.stringify(detailMeal))
+        localStorage.setItem('selectedCategory', JSON.stringify(selectedCategoryData.strCategory))
+
+        window.location.href = `category-detail.html?categoryName=${encodeURIComponent(selectedCategory)}`
+    })
 
     const mealId = urlParams.get('mealId')
     const apiUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
