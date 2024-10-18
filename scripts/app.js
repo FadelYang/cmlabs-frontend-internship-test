@@ -15,6 +15,7 @@ $(document).ready(function () {
 
   let mealCategories = []
 
+  $('#mealCategoriesContainer').html('load meal data')
   $.get('https://www.themealdb.com/api/json/v1/1/categories.php', function (data) {
     mealCategories = data.categories
 

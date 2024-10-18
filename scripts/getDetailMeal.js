@@ -19,10 +19,13 @@ $(document).ready(function () {
 
     let meal = []
 
+    $('.main-content').hide()
     $.ajax({
         url: apiUrl,
         method: 'GET',
         success: function (data) {
+            $('#loadingContent').html('')
+            $('.main-content').show()
             meal = data.meals[0]
 
             tags = meal.strTags ? meal.strTags.split(',') : ['tag not found']
@@ -33,6 +36,8 @@ $(document).ready(function () {
             $('#strTags').html(tagsHtml)
             $('#strMealThumb').attr('src', meal.strMealThumb).attr('alt', `${meal.strMeal} image`)
             $('#strInstructions').html(meal.strInstructions)
+            $('#strYoutube').attr('src', meal.strYoutube.replace('watch?v=', 'embed/'))
+            console.log(meal.strYoutube.replace('watch?v=', 'embed/'));
 
 
             meal = Object.entries(meal)

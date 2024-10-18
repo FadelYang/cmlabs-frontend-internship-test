@@ -31,11 +31,12 @@
     </nav>
 
     <main class="container">
-        <div class="mt-5 mb-5">
+        <div class="mt-5 mb-5 main-content">
             <h1 class="h1" id="strMeal"></h1>
             <div id="strTags" class="mb-3"></div>
-            <div style="max-width: 400px;">
+            <div style="max-width: 400px;" class="mb-3">
                 <img src="" alt="" id="strMealThumb" class="img-thumbnail img-fluid mb-3">
+                <a href="" class="btn btn-primary">scroll below to get video instruction 😉</a>
             </div>
             <div>
                 <div>
@@ -46,15 +47,19 @@
                         </ul>
                     </div>
                 </div>
-                <div>
+                <div class="mb-3">
                     <h1 class="h1">Instructions</h1>
                     <div id="strInstructions"></div>
                 </div>
                 <div>
                     <h1 class="h1">Video Instructions</h1>
+                    <div class="ratio ratio-16x9">
+                        <iframe class="" id="strYoutube" allowfullscreen></iframe>
+                      </div>
                 </div>
             </div>
         </div>
+        <div id="loadingContent" class="container mt-5">load meal data</div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">

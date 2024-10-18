@@ -27,6 +27,7 @@ $(document).ready(function () {
 
     let meals = []
 
+    $('#categoryMealsContainer').html('load meal data')
     $.ajax({
         url: apiUrl,
         method: 'GET',
