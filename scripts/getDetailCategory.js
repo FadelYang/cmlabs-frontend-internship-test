@@ -6,15 +6,15 @@ $(document).ready(function () {
                   <div class="card-body text-center d-flex flex-column justify-content-between gap-3">
                     <h5 class="card-title">${meal.strMeal}</h5>
                     <div>
-                        <a href="#" class="btn btn-dark meals-category-link" data-name="${meal.idMeal}">Check Recipe</a>
+                        <a href="#" class="btn btn-dark meals-recipe-link" data-name="${meal.idMeal}">Check Recipe</a>
                     </div>
                   </div>
                 </div>
             `
-      }
+    }
 
     const urlParams = new URLSearchParams(window.location.search)
-    
+
     const selectedCategoryData = JSON.parse(localStorage.getItem('selectedCategoryData'));
 
     $('#categoryThumb').attr('src', selectedCategoryData.strCategoryThumb).attr('alt', `${selectedCategoryData.strCategory} meals image`)
@@ -22,7 +22,7 @@ $(document).ready(function () {
     $('#categoryDescription').html(selectedCategoryData.strCategoryDescription)
 
     const categoryName = urlParams.get('categoryName')
-    
+
     const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`
 
     let meals = []
@@ -41,6 +41,21 @@ $(document).ready(function () {
         error: function () {
             console.log('error get meals item');
         }
+    })
 
+    // get detail recipe
+    $(document).on('click', '.meals-recipe-link', function (e) {
+        e.preventDefault();
+
+        const mealId = $(this).data('name')
+
+        console.log(mealId);
+
+        // Set local storage to send selected category data to detail page
+        const meal = meals.filter((meal) => meal.idMeal == mealId)[0]
+
+        localStorage.setItem('detailMeal', JSON.stringify(meal))
+
+        window.location.href = `meal-detail.html?mealId=${encodeURIComponent(meal.idMeal)}`
     })
 })
