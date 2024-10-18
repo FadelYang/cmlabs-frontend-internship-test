@@ -13,9 +13,20 @@ $(document).ready(function () {
               <img src="${mealCategory.strCategoryThumb}" class="card-img-top p-3" alt="...">
               <div class="card-body text-center">
                 <h5 class="card-title">${mealCategory.strCategory}</h5>
-                <a href="#" class="btn btn-dark">Check Meals</a>
+                <a href="#" class="btn btn-dark meals-category-link" data-name="${mealCategory.strCategory}">Check Meals</a>
               </div>
             </div>
         `
   }
+
+  // Get meals by category
+  $(document).on('click', '.meals-category-link', function (e) {
+    e.preventDefault();
+
+    const categoryName = $(this).data('name')
+
+    console.log(`You click ${categoryName}`);
+
+    window.location.href = `pages/category-detail.html?categoryName=${encodeURIComponent(categoryName)}`
+  })
 })
